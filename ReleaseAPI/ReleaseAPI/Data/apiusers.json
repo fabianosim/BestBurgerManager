@@ -1,0 +1,22 @@
+[
+  {
+    "Id": "1",
+    "Name": "Point of Sale 1",
+    "Type": "1"
+  },
+  {
+    "Id": "2",
+    "Name": "Point of Sale 2",
+    "Type": "1"
+  },
+  {
+    "Id": "3",
+    "Name": "Point of Sale 3",
+    "Type": "1"
+  },
+  {
+    "Id": "4",
+    "Name": "Kitchen",
+    "Type": "2"
+  }
+]

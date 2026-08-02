@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BestBurgerManagerAPI</name>
+    </assembly>
+    <members>
+        <member name="T:BestBurgerManagerAPI.ApiResponses.ApiBadRequestResponse">
+            <summary>
+            Class to handle BadRequest responses.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.ApiResponses.ApiBadRequestResponse.Errors">
+            <summary>
+            A dictionary containing the errors from the called methods.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.ApiResponses.ApiBadRequestResponse.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Prepare a BadRequest (HTTP error 400) to be returned to client.
+            </summary>
+            <param name="modelState">The model state containing the errors.</param>
+        </member>
+        <member name="T:BestBurgerManagerAPI.ApiResponses.ApiOkResponse">
+            <summary>
+            Class to handle OK responses to the client.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.ApiResponses.ApiOkResponse.Result">
+            <summary>
+            The result object that is part of the response.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.ApiResponses.ApiOkResponse.#ctor(System.Object)">
+            <summary>
+            Prepare a HTTP 200 code response to the client with a message.
+            </summary>
+            <param name="result">The result object from the called methods.</param>
+        </member>
+        <member name="T:BestBurgerManagerAPI.ApiResponses.ApiResponse">
+            <summary>
+            Handles the HTTP responses to the client.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.ApiResponses.ApiResponse.StatusCode">
+            <summary>
+            The HTTP Status Code.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.ApiResponses.ApiResponse.Message">
+            <summary>
+            A Json Object contianing the message.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.ApiResponses.ApiResponse.#ctor(System.Int32,System.String)">
+            <summary>
+            Sets a response and passes a string as response message.
+            </summary>
+            <param name="statusCode">The HTTP status code.</param>
+            <param name="message">The string message.</param>
+        </member>
+        <member name="T:BestBurgerManagerAPI.ApiResponses.ApiValidationFilter">
+            <summary>
+            Class to handle filter validations from the calling methods.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.ApiResponses.ApiValidationFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Event called when a validation is being executed.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:BestBurgerManagerAPI.ApiResponses.ErrorKeys">
+            <summary>
+            Enumeration of the possible errors that will be returned to the caller.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.UnhandledError">
+            <summary>
+            An unhandled error occurred in the application.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.InvalidObjectType">
+            <summary>
+            Invalid object type error.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.InvalidPOSId">
+            <summary>
+            The Point of Sale ID is invalid.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.InvalidStatusId">
+            <summary>
+            The Status ID is invalid.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.NoItemsInOrder">
+            <summary>
+            There is no items in the order item's list.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.UserNotFound">
+            <summary>
+            THe user wasn't found.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.ProductNotFound">
+            <summary>
+            Product not found.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.OrderNotFound">
+            <summary>
+            Order not found.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.ApiResponses.ErrorKeys.OrderNotFullyReady">
+            <summary>
+            The order is not yet fully ready. That means there are some products being prepared.
+            </summary>
+        </member>
+        <member name="T:BestBurgerManagerAPI.ApiResponses.Support.RequestResponses">
+            <summary>
+            THis class holds some support methods to handle request responses to controller methods.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.ApiResponses.Support.RequestResponses.RaiseKitchenOperationError(System.Exception,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Add an error to the ModelState if one of the below exceptions is caught.
+            </summary>
+            <param name="ex">The exception object to be tested.</param>
+            <param name="modelState">The current ModelState reference.</param>
+            <returns>Returns an object containing a Bad Request response to the client.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.ApiResponses.Support.RequestResponses.RaiseOrderOperationError(System.Exception,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Add an error to the ModelState if one of the below exceptions is caught.
+            </summary>
+            <param name="ex">The exception object to be tested.</param>
+            <param name="modelState">The current ModelState reference.</param>
+            <returns>Returns an object containing a Bad Request response to the client.</returns>
+        </member>
+        <member name="T:BestBurgerManagerAPI.Controllers.KitchenController">
+            <summary>
+            HTTP Endpoint for main Kitchen order and product control.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.KitchenController.#ctor(BestBurgerManager.Interfaces.IProductManager,BestBurgerManager.Interfaces.IOrderManager)">
+            <summary>
+            Dependency Injection setup.
+            </summary>
+            <param name="productManager">Product Manager Service</param>
+            <param name="orderManager">Order Manager Service</param>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.KitchenController.PrepareProduct(System.Int32,System.Int32)">
+            PUT api/[controller]/product/preparing/{idproduct}
+            <summary>
+            PUT controller responsible for setting an item order to Preparing status
+            </summary>
+            <param name="orderId">The order ID that belongs to the product.</param>
+            <param name="productId">The product ID to be updated.</param>
+            <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.KitchenController.ProductReady(System.Int32,System.Int32)">
+            PUT api/[controller]/product/ready/{productId}
+            <summary>
+            PUT controller responsible for setting an item order to Ready status
+            </summary>
+            <param name="orderId">THe order ID that belongs to the product.</param>
+            <param name="productId">The product ID to be updated.</param>
+            <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.KitchenController.CancelProduct(System.Int32,System.Int32)">
+            PUT api/[controller]/product/ready/{productId}
+            <summary>
+            PUT controller responsible for setting an item order to Cancelled status
+            </summary>
+            <param name="orderId">The order ID that belongs to the product.</param>
+            <param name="productId">The product ID to be updated.</param>
+            <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.KitchenController.OrderReady(System.Int32)">
+            PUT api/[controller]/product/preparing/{productId}
+            <summary>
+            PUT controller responsible for setting an order to ready after all products are ready.
+            </summary>
+            <param name="orderId">The order ID to be updated to Ready state.</param>
+        </member>
+        <member name="T:BestBurgerManagerAPI.Controllers.OrdersController">
+            <summary>
+            HTTP Endpoint responsible to manage the placed orders.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.Controllers.OrdersController.ETAG_HEADER">
+            <summary>
+            Constants for concurrency handling for PUT and GET requests.
+            </summary>
+        </member>
+        <member name="F:BestBurgerManagerAPI.Controllers.OrdersController._userManager">
+            <summary>
+            UserManager DI object
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.OrdersController.#ctor(BestBurgerManager.Interfaces.IUserManager,BestBurgerManager.Interfaces.IOrderManager)">
+            <summary>
+            Dependency Injection setup.
+            </summary>
+            <param name="userManager">User Manager Service</param>
+            <param name="orderManager">Order Manager Service</param>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.OrdersController.OrderById(System.Int32)">
+            <summary>
+            Gets an order by its ID.
+            </summary>
+            <param name="orderId">The order ID to be queried.</param>
+            <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.OrdersController.PlaceOrders(System.Object)">
+             POST api/[controller]/placeorders
+             <summary>
+             Endpoint responsible to process multiple order requests.
+             </summary>
+             <remarks>
+             Usage Example:
+            
+            [
+              {
+                "PosId": 1,
+                 "Items": [
+                 {
+                 "Id": 1,
+                 "Name": "Burger",
+                 "Status": 1,
+                 "KitchenArea": 1
+                 }
+                 ],
+                 "Status": 1 
+              },
+              {
+                "PosId": 1,
+                "Items": [
+                  {
+                    "Id": 1,
+                    "Name": "Fries",
+                    "Status": 1,
+                    "KitchenArea": 2
+                  },
+                  {
+                    "Id": 2,
+                    "Name": "Burger",
+                    "Status": 1,
+                    "KitchenArea": 1
+                  }
+                ],
+                "Status": 1 
+              },
+            ]
+            
+             </remarks>
+             <param name="orders">The list of orders to be inserted. It must be a Json Array.</param>
+             <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.OrdersController.PlaceOrder(System.Object)">
+             POST api/[controller]/placeorder
+             <summary>
+             Endpoint responsible to process order requests.
+             </summary>
+             <remarks>
+             Usage Example:
+            
+             {
+                  "PosId": 1,
+                  "Items": [
+                      {
+                          "Id": 1,
+                          "Name": "Burger",
+                          "Status": 1,
+                          "KitchenArea": 1
+                      }
+                  ],
+                  "Status": 1 
+              }
+            
+             </remarks>
+             <param name="order">The order to be inserted. It must be a Json Object.</param>
+             <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.OrdersController.OrdersByStatus(System.Int32)">
+            <summary>
+            Get an order by Order Status.
+            </summary>
+            <param name="statusId">The status ID to be queried.</param>
+            <returns>Returns the order on the requested status.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.OrdersController.CancelOrder(System.Int32)">
+            PUT api/[controller]/order/cancel/{orderId}
+            <summary>
+            PUT controller responsible for setting an order to Cancelled status
+            </summary>
+            <param name="orderId">The order ID to be cancelled.</param>
+            <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Controllers.OrdersController.Delete(System.Int32)">
+            DELETE api/[controller]/order/[/controller]
+            <summary>
+            DELETE controller responsible for deleting an order from the persistent list.
+            </summary>
+            <param name="orderId">The order ID to be deleted.</param>
+            <returns>An ActionResult containing a Json Object and the message.</returns>
+        </member>
+        <member name="T:BestBurgerManagerAPI.Program">
+            <summary>
+            Main program for this API.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Program.Main(System.String[])">
+            <summary>
+            Main Constructor.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            Creates the WebHostBuilder object.
+            </summary>
+            <param name="args"></param>
+            <returns>An implementation of IWebHostBuilder</returns>
+        </member>
+        <member name="T:BestBurgerManagerAPI.ServiceExtensions">
+            <summary>
+            Class that extends the Service registration implementation. Just to make things clearer when setting up the services for this API.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.ServiceExtensions.PlatformServices">
+            <summary>
+            The registered platform services reference.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.ServiceExtensions.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            Extension method to register multiple services for the API.
+            </summary>
+            <param name="services">The service collection instance.</param>
+            <param name="env">The environment containing running application configuration.</param>
+            <returns>Returns the service collection containing all registered services.</returns>
+        </member>
+        <member name="T:BestBurgerManagerAPI.Startup">
+            <summary>
+            API's Startup class.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.Startup._environment">
+            <summary>
+            The environment for the running API.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.Startup._loggerFactory">
+            <summary>
+            The logger factory implementation.
+            </summary>
+        </member>
+        <member name="P:BestBurgerManagerAPI.Startup.Configuration">
+            <summary>
+            The Configuration object dependency. Contains configuration properties about the application.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Startup.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Entry point for Startup class.
+            </summary>
+            <param name="environment">An implementation of the environment</param>
+            <param name="loggerFactory">An implementation of the logger factory</param>
+            <param name="configuration">An implementation of the configuration object</param>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">The Service Collection implementation.</param>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,BestBurgerManager.Interfaces.IUserManager)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">The Application Builder implementation</param>
+            <param name="env">The Environment Implementation</param>
+            <param name="userManager">The UserManager implementation. Populates the fixed users for this API.</param>
+        </member>
+        <member name="T:BestBurgerManagerAPI.Support.HashFactory">
+            <summary>
+            Manipulates hash values. The purpose of this class is to manipulate concurrency on GET an PUT controllers.
+            </summary>
+        </member>
+        <member name="M:BestBurgerManagerAPI.Support.HashFactory.GetHash(System.Object)">
+            <summary>
+            Get the hash for a given object.
+            </summary>
+            <param name="model">The object to have its hash extracted.</param>
+            <returns>A string representing the hash.</returns>
+        </member>
+        <member name="T:ExtensionMethods.StringExtensions">
+            <summary>
+            Some useful string extensions.
+            </summary>
+        </member>
+        <member name="M:ExtensionMethods.StringExtensions.RemoveQuotes(System.String)">
+            <summary>
+            Removes quotes for a given string.
+            </summary>
+            <param name="value">The needle string.</param>
+            <returns>Returns a string without quotes.</returns>
+        </member>
+        <member name="M:ExtensionMethods.StringExtensions.RemoveQuotes(Microsoft.Extensions.Primitives.StringValues)">
+            <summary>
+            Removes quotes for a StringValues object.
+            </summary>
+            <param name="value">The given StringValues object.</param>
+            <returns>A string without the quotes.</returns>
+        </member>
+    </members>
+</doc>
